@@ -1,5 +1,16 @@
-# include "fractol.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smoreron <7353718@gmail.com>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/05 18:37:59 by smoreron          #+#    #+#             */
+/*   Updated: 2024/03/05 18:37:59 by smoreron         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+# include "fractol.h"
 
 static void malloc_error(void)
 {
@@ -72,40 +83,6 @@ static void handle_pixel(int x, int y, t_fractol *fractol)
     my_pixel_put(x, y, &fractol->img, PSYCHEDELIC_PURPLE);
 }
 
-
-// static void handle_pixel(int x, int y, t_fractol *fractol)
-// {
-// 	t_complex z;
-// 	t_complex c;
-// 	int color;
-// 	int i;
-// 	i = 0;
-// 	z.x = 0.0;
-// 	z.y = 0.0;
-
-// 	// c.x = map(x, -2, +2, 0, WIDTH);
-// 	// c.y = map(y, +2, -2, 0, HEIGHT);
-
-// 	c.x = map(x, 0, WIDTH, -2, 1); // Экран -> Комплексная плоскость
-// 	c.y = map(y, 0, HEIGHT, -1, 1); // Экран -> Комплексная плоскость
-
-
-// 	while (i < fractol->iterations_defintion)
-// 	{
-// 		z = sum_comlex(square_complex(z), c);
-// 		if ((z.x * z.x) + (z.y * z.y) > fractol->escape_value)
-// 		{
-// 			// color = map(i, BLACK, WHITE, 0, fractol->iterations_defintion);
-// 			color = map(i, 0, fractol->iterations_defintion, BLACK, WHITE);
-// 			my_pixel_put(x, y, &fractol->img, color);
-// 			return;
-// 		}
-// 		i++;
-// 	}
-// 	my_pixel_put(x, y, &fractol->img, PSYCHEDELIC_PURPLE);	
-// 	//*(unsigned int *)(fractol->img.pixwls_ptr + (y * fractol->img.line_length + x * (fractol->img.bpp / 8))) = color;
-// }	
-
 void fractol_render(t_fractol *fractol)
 {
 	int x;
@@ -170,48 +147,12 @@ void fractol_init(t_fractol *fractol)
 	printf("Fractol initialized successfully.\n");
 }
 
-
-// void fractol_init(t_fractol *fractol)
-// {
-// 	fractol->mlx_connection = mlx_init();
-// 	if (NULL == fractol->mlx_connection)
-// 	{
-// 		malloc_error();
-// 	}
-// 	fractol->mlx_window = mlx_new_window(fractol->mlx_connection, WIDTH, HEIGHT, fractol->name);
-// 	if (NULL == fractol->mlx_window)
-// 	{
-// 		//mlx_destroy_window(fractol->mlx_connection, fractol->mlx_window);
-// 		mlx_destroy_display(fractol->mlx_connection);
-// 		free(fractol->mlx_connection);
-// 		malloc_error();
-// 	}
-// 	fractol->img.img_ptr = mlx_new_image(fractol->mlx_connection, WIDTH, HEIGHT);
-// 	if (NULL == fractol->img.img_ptr)
-// 	{
-// 		mlx_destroy_window(fractol->mlx_connection, fractol->mlx_window);
-// 		mlx_destroy_display(fractol->mlx_connection);
-// 		free(fractol->mlx_connection);
-// 		malloc_error();
-// 	}
-// 	fractol->img.pixwls_ptr = mlx_get_data_addr(fractol->img.img_ptr, &fractol->img.bpp, &fractol->img.line_length, &fractol->img.endian);
-// 	// fractol->max_iter = 50;
-// 	// fractol->zoom = 1.0f;
-// 	// fractol->x_shift = 0.0f;
-// 	// fractol->y_shift = 0.0f;
-// 	// fractol->min.real = -2.0f;
-// 	// fractol->min.img = -1.0f;
-// 	// fractol->max.real = 1.0f;
-// 	// fractol->max.img = 1.0f;
-// 	// fractol->fractal = mandelbrot;
-// }
-
 int main(int ac, char **av)
 {
 	t_fractol fractol;
 	if ((ac == 2 && !ft_strncmp(av[1], "mandelbrot", 10)) || (ac == 4 && !ft_strncmp(av[1], "julia", 5)))
 	{
-		printf("%s\n", "good");
+		//printf("%s\n", "good");
 		fractol.name = av[1];
 		fractol_init(&fractol);
 		fractol_render(&fractol);
@@ -220,8 +161,7 @@ int main(int ac, char **av)
 	else
 	{
 		ft_putstr_fd(ERROR_MESSAGE, 1);
-		printf("res = %d", ft_strncmp(av[1], "mandelbrot", 10));
+		//printf("res = %d", ft_strncmp(av[1], "mandelbrot", 10));
 		exit(EXIT_FAILURE);
-	}
-	
+	}	
 }

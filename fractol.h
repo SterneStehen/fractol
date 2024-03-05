@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smoreron <7353718@gmail.com>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/05 18:38:08 by smoreron          #+#    #+#             */
+/*   Updated: 2024/03/05 18:38:08 by smoreron         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACTOL_H
 #define FRACTOL_H
 
@@ -33,33 +45,32 @@
 #define ELECTRIC_BLUE 0x7DF9FF
 #define LAVA_RED 0xFF4500
 
-typedef struct s_complex
+typedef struct	s_complex
 {
-    double x;
-	//x
-    double y;
-	//y
-} t_complex;
+    double	x;
+	//real
+    double	y;
+	//imaginary
+}	t_complex;
 
 typedef struct s_img
 {
-	void *img_ptr;
-	char *pixwls_ptr;
-	int bpp;
-	int endian;
-	int line_length;
+	void	*img_ptr;
+	char	*pixwls_ptr;
+	int		bpp;
+	int		endian;
+	int		line_length;
 } t_img;
 
 typedef struct s_fractol
 {
-	char *name;
-	void *mlx_connection;
-	void *mlx_window;
-	t_img img;
-	double escape_value;
-	int iterations_defintion;
+	char	*name;
+	void	*mlx_connection;
+	void	*mlx_window;
+	t_img	img;
+	double	escape_value;
+	int		iterations_defintion;
 
-	
 	// int bits_per_pixel;
 	// int line_length;
 	// int endian;
@@ -74,16 +85,16 @@ typedef struct s_fractol
 } t_fractol;
 
 
-
-void fractol_init(t_fractol *fractol);
-static void malloc_error(void);
-void fractol_render(t_fractol *fractol);
-double map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
-t_complex square_complex(t_complex z);
-t_complex sum_comlex(t_complex z1, t_complex z2);
-double escape_value(t_complex z);
-static void handle_pixel(int x, int y, t_fractol *fractol);
-void data_init(t_fractol *fractol);
-static void my_pixel_put(int x, int y, t_img *img, int color);
+// function prototypes
+void		fractol_init(t_fractol *fractol);
+void		fractol_render(t_fractol *fractol);
+double		map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
+t_complex	square_complex(t_complex z);
+t_complex	sum_comlex(t_complex z1, t_complex z2);
+double		escape_value(t_complex z);
+static void	handle_pixel(int x, int y, t_fractol *fractol);
+static void	malloc_error(void);
+void		data_init(t_fractol *fractol);
+static void	my_pixel_put(int x, int y, t_img *img, int color);
 
 #endif
